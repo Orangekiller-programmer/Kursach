@@ -35,7 +35,7 @@ namespace WindowsFormsApp1
 
         }
 
-    //ебал мамашу всех детей
+
 
 
     }
