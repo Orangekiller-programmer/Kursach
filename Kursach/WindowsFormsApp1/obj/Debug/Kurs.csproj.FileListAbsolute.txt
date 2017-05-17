@@ -7,3 +7,12 @@ C:\Users\МАКСИМ\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\obj\Debu
 C:\Users\МАКСИМ\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
 C:\Users\МАКСИМ\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
 C:\Users\МАКСИМ\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\obj\Debug\Kurs.csproj.GenerateResource.Cache
+C:\Users\maxsa\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\maxsa\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\maxsa\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\maxsa\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\obj\Debug\Kurs.csprojResolveAssemblyReference.cache
+C:\Users\maxsa\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\maxsa\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\maxsa\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\obj\Debug\Kurs.csproj.GenerateResource.Cache
+C:\Users\maxsa\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\maxsa\Documents\GitHub\Kursach\Kursach\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb

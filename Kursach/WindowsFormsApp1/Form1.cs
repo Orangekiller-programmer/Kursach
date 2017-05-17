@@ -19,9 +19,9 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
-        List<Student> stud = new List <Student>();
-        
-       
+        List<Student> stud = new List<Student>();
+
+
 
 
 
@@ -47,25 +47,25 @@ namespace WindowsFormsApp1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if ((String.IsNullOrWhiteSpace(maskedTextBox2.Text)) || (String.IsNullOrWhiteSpace(maskedTextBox3.Text)) || (String.IsNullOrWhiteSpace(textBox4.Text)) ||  (String.IsNullOrWhiteSpace(maskedTextBox1.Text)))
+            if ((String.IsNullOrWhiteSpace(maskedTextBox2.Text)) || (String.IsNullOrWhiteSpace(maskedTextBox3.Text)) || (String.IsNullOrWhiteSpace(textBox4.Text)) || (String.IsNullOrWhiteSpace(maskedTextBox1.Text)))
             {
                 button1.Enabled = false;
             }
             else
             {
                 button1.Enabled = true;
-                 
+
             }
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             listView1.Clear();
-         
 
-            
-           
+
+
+
             stud.Add(new Student(maskedTextBox2.Text, maskedTextBox1.Text, maskedTextBox3.Text, textBox4.Text));
             maskedTextBox2.Clear();
             maskedTextBox1.Clear();
@@ -76,10 +76,10 @@ namespace WindowsFormsApp1
 
             for (int i = 0; i < stud.Count; i++)
             {
-                
+
                 listView1.Items.Add(stud[i].getter());
 
-                
+
 
             }
 
@@ -90,18 +90,18 @@ namespace WindowsFormsApp1
 
 
         {
-            
+
             foreach (ListViewItem item in listView1.SelectedItems)
             {
                 int num = listView1.SelectedIndices[0];
                 stud.RemoveAt(num);
                 listView1.Items[num].Remove();
-                
+
 
             }
-         
-           
-            }
+
+
+        }
 
 
         private void label4_Click(object sender, EventArgs e)
@@ -126,7 +126,7 @@ namespace WindowsFormsApp1
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
 
         }
 
@@ -154,7 +154,7 @@ namespace WindowsFormsApp1
         {
             foreach (ListViewItem item in listView1.SelectedItems)
             {
-                
+
                 int num = listView1.SelectedIndices[0];
                 stud[num].Setter(textBox4.Text);
 
@@ -164,18 +164,18 @@ namespace WindowsFormsApp1
         private void button4_Click(object sender, EventArgs e)
         {
             listView1.Clear();
-          
+
 
             for (int a = 0; a < stud.Count; a++)
             {
                 listView1.Items.Add(stud[a].getter());
-               
+
 
             }
 
         }
 
-        
+
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -184,11 +184,11 @@ namespace WindowsFormsApp1
                 if (stud[i].rabota == textBox1.Text)
                 {
                     listView1.Clear();
-                    
+
                     listView1.Items.Add(stud[i].getter());
-                   
-                }                       
-                
+
+                }
+
             }
 
 
@@ -201,50 +201,68 @@ namespace WindowsFormsApp1
 
         private void button9_Click(object sender, EventArgs e)
         {
-            /* var document = new XmlDocument();
-             document.Load("file.xml");
-             foreach (XmlNode node in document.DocumentElement)
-             {
-                 string number =node.Attributes[0].InnerText;
-                 string group = node.Attributes[0].InnerText;
-                 string kodspec = node.Attributes[0].InnerText;
-                 string rabota = node.Attributes[0].InnerText;
 
-                stud.Add(new Student(number, group, kodspec, rabota));*/
+            Stream myStream = null;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            XmlDocument xmlDocument = new XmlDocument();
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
 
-            // Load the XML file
-            xmlDocument.Load("file.xml");
-
-            // Get all book nodes
-            XmlNodeList StudentNodes = xmlDocument.GetElementsByTagName("Student");
-
-            // Iterate through all books
-            foreach (XmlNode StudentNode in StudentNodes)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                // Use indexers to get the isbn, author and title
-              ;
-                XmlNode numberNode = StudentNode["number"];
-                XmlNode GroupNode = StudentNode["group"];
-                XmlNode kodspecNode = StudentNode["kodspec"];
-                XmlNode rabotaNode = StudentNode["rabota"];
-                stud.Add(new Student(numberNode.InnerText, GroupNode.InnerText, kodspecNode.InnerText, rabotaNode.InnerText)); 
+                try
+                {
+                    if ((myStream = openFileDialog1.OpenFile()) != null)
+                    {
+                        using (myStream)
+                        {
+
+                            XmlDocument xmlDocument = new XmlDocument();
+
+                            // Load the XML file
+                            xmlDocument.Load(myStream);
+
+                            // Get all book nodes
+                            XmlNodeList StudentNodes = xmlDocument.GetElementsByTagName("Student");
+
+                            // Iterate through all books
+                            foreach (XmlNode StudentNode in StudentNodes)
+                            {
+                                // Use indexers to get the isbn, author and title
+                                ;
+                                XmlNode numberNode = StudentNode["number"];
+                                XmlNode GroupNode = StudentNode["group"];
+                                XmlNode kodspecNode = StudentNode["kodspec"];
+                                XmlNode rabotaNode = StudentNode["rabota"];
+                                stud.Add(new Student(numberNode.InnerText, GroupNode.InnerText, kodspecNode.InnerText, rabotaNode.InnerText));
 
 
+                            }
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Недопустимый файл ");
+                }
             }
-        
-       // MessageBox.Show(document.InnerText);
         }
+
+
+
+
 
         private void button10_Click(object sender, EventArgs e)
         {
-            
-                FileStream stream = new FileStream("file.xml", FileMode.Create);
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Student>));
-                serializer.Serialize(stream, stud);
-                stream.Close();
-            
+
+            FileStream stream = new FileStream("file.xml", FileMode.Create);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Student>));
+            serializer.Serialize(stream, stud);
+            stream.Close();
+
 
             MessageBox.Show("Сохранено");
         }
