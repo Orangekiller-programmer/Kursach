@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ArrayOfStudent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Student>
+    <number>23ИО123</number>
+    <group>ИСБО-21-31</group>
+    <kodspec>21,31,3_</kodspec>
+    <rabota>21313</rabota>
+  </Student>
+  <Student>
+    <number>21ИО321</number>
+    <group>ИСБО-12-31</group>
+    <kodspec>12,31,32</kodspec>
+    <rabota>21313</rabota>
+  </Student>
+  <Student>
+    <number>21ИО313</number>
+    <group>ИСБО-23-12</group>
+    <kodspec>_1,23,13</kodspec>
+    <rabota>3131</rabota>
+  </Student>
+</ArrayOfStudent>

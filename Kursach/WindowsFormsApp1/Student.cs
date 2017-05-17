@@ -11,39 +11,43 @@ namespace WindowsFormsApp1
     {
 
       
-        protected string number;
-        protected string group;
-        protected string kodspec;
+        public string number;
+        public string group;
+        public string kodspec;
         public string rabota;
 
 
 
-        protected Student(string number, string group, string kodspec, string rabota)
+        public Student(string number, string group, string kodspec, string rabota)
         {
             this.number = number;
             this.group = group;
             this.kodspec = kodspec;
             this.rabota = rabota;
-
+            
 
         }
+        public Student()
+        { }
 
         public void Setter(string qq)
         {
             rabota = qq;
         }
 
+     
 
+       
 
-        ~Student()
+        public string getter ()
         {
-            MessageBox.Show("Объект удален");
+            string stroka = number + "  " + group + "  " + kodspec + "  " + rabota;
+            return stroka;
         }
-
-
 
         
 
 
     }
     }
+

@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace WindowsFormsApp1
 {
@@ -16,7 +19,8 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
-        List<Rabotaushiy> stud = new List <Rabotaushiy>();
+        List<Student> stud = new List <Student>();
+        
        
 
 
@@ -58,11 +62,11 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             listView1.Clear();
-            listView2.Clear();
+         
 
             
            
-            stud.Add(new Rabotaushiy(maskedTextBox2.Text, maskedTextBox1.Text, maskedTextBox3.Text, textBox4.Text));
+            stud.Add(new Student(maskedTextBox2.Text, maskedTextBox1.Text, maskedTextBox3.Text, textBox4.Text));
             maskedTextBox2.Clear();
             maskedTextBox1.Clear();
             maskedTextBox3.Clear();
@@ -70,10 +74,12 @@ namespace WindowsFormsApp1
 
 
 
-            for (int a = 0; a < stud.Count; a++)
+            for (int i = 0; i < stud.Count; i++)
             {
-                listView1.Items.Add(stud[a].geter());
-                listView2.Items.Add(stud[a].Group);
+                
+                listView1.Items.Add(stud[i].getter());
+
+                
 
             }
 
@@ -90,20 +96,11 @@ namespace WindowsFormsApp1
                 int num = listView1.SelectedIndices[0];
                 stud.RemoveAt(num);
                 listView1.Items[num].Remove();
-                listView2.Items[num].Remove();
+                
 
             }
-            foreach(ListViewItem item in listView2.SelectedItems)
-            {
-                int num = listView2.SelectedIndices[0];
-                stud.RemoveAt(num);
-                listView1.Items[num].Remove();
-                listView2.Items[num].Remove();
-
-
-
-                }
-
+         
+           
             }
 
 
@@ -167,12 +164,12 @@ namespace WindowsFormsApp1
         private void button4_Click(object sender, EventArgs e)
         {
             listView1.Clear();
-            listView2.Clear();
+          
 
             for (int a = 0; a < stud.Count; a++)
             {
-                listView1.Items.Add(stud[a].geter());
-                listView2.Items.Add(stud[a].Group);
+                listView1.Items.Add(stud[a].getter());
+               
 
             }
 
@@ -187,21 +184,11 @@ namespace WindowsFormsApp1
                 if (stud[i].rabota == textBox1.Text)
                 {
                     listView1.Clear();
-                    listView2.Clear();
-                    listView1.Items.Add(stud[i].geter());
-                    listView2.Items.Add(stud[i].Group);
-
-                }
-
-                if (stud[i].Group ==textBox1.Text)
-                        {
-
-                    listView1.Clear();
-                    listView2.Clear();
-                    listView1.Items.Add(stud[i].geter());
-                    listView2.Items.Add(stud[i].Group);
-
-                }
+                    
+                    listView1.Items.Add(stud[i].getter());
+                   
+                }                       
+                
             }
 
 
@@ -210,6 +197,56 @@ namespace WindowsFormsApp1
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            /* var document = new XmlDocument();
+             document.Load("file.xml");
+             foreach (XmlNode node in document.DocumentElement)
+             {
+                 string number =node.Attributes[0].InnerText;
+                 string group = node.Attributes[0].InnerText;
+                 string kodspec = node.Attributes[0].InnerText;
+                 string rabota = node.Attributes[0].InnerText;
+
+                stud.Add(new Student(number, group, kodspec, rabota));*/
+
+            XmlDocument xmlDocument = new XmlDocument();
+
+            // Load the XML file
+            xmlDocument.Load("file.xml");
+
+            // Get all book nodes
+            XmlNodeList StudentNodes = xmlDocument.GetElementsByTagName("Student");
+
+            // Iterate through all books
+            foreach (XmlNode StudentNode in StudentNodes)
+            {
+                // Use indexers to get the isbn, author and title
+              ;
+                XmlNode numberNode = StudentNode["number"];
+                XmlNode GroupNode = StudentNode["group"];
+                XmlNode kodspecNode = StudentNode["kodspec"];
+                XmlNode rabotaNode = StudentNode["rabota"];
+                stud.Add(new Student(numberNode.InnerText, GroupNode.InnerText, kodspecNode.InnerText, rabotaNode.InnerText)); 
+
+
+            }
+        
+       // MessageBox.Show(document.InnerText);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            
+                FileStream stream = new FileStream("file.xml", FileMode.Create);
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Student>));
+                serializer.Serialize(stream, stud);
+                stream.Close();
+            
+
+            MessageBox.Show("Сохранено");
         }
     }
 }
